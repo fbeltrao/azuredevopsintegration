@@ -10,8 +10,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet test ./test/**/*.csproj
-  displayName: 'dotnet test ./test/**/*.csproj'
+- script: dotnet test ./test/*/*.csproj
+  displayName: 'Run unit tests'
 
-- script: dotnet build --configuration $(buildConfiguration)
+- script: dotnet test ./test/integration/*/*.csproj
+  displayName: 'Run integration tests'  
+
+- script: dotnet build --configuration $(buildConfiguration) ./src/**/*.csproj
   displayName: 'dotnet build $(buildConfiguration)'
